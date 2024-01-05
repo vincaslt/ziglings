@@ -17,21 +17,22 @@ pub fn main() void {
 // even though this function can return in four different places!
 fn printAnimal(animal: u8) void {
     std.debug.print("(", .{});
+    {
+        defer std.debug.print(") ", .{}); // <---- how?!
 
-    std.debug.print(") ", .{}); // <---- how?!
+        if (animal == 'g') {
+            std.debug.print("Goat", .{});
+            return;
+        }
+        if (animal == 'c') {
+            std.debug.print("Cat", .{});
+            return;
+        }
+        if (animal == 'd') {
+            std.debug.print("Dog", .{});
+            return;
+        }
 
-    if (animal == 'g') {
-        std.debug.print("Goat", .{});
-        return;
+        std.debug.print("Unknown", .{});
     }
-    if (animal == 'c') {
-        std.debug.print("Cat", .{});
-        return;
-    }
-    if (animal == 'd') {
-        std.debug.print("Dog", .{});
-        return;
-    }
-
-    std.debug.print("Unknown", .{});
 }
